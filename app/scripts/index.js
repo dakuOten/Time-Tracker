@@ -37,6 +37,7 @@ ZOHO.embeddedApp.on("PageLoad", function (data) {
     const hourlyRateDiv = getElement('hourly-rate-div');
     const descriptionDiv = getElement('description-div');
     const leavetimer = getElement('leave-timer');
+    const restriction = getElement('restrictionMessage');
     
     const addClass = (element, className) => element.classList.add(className);
     const removeClass = (element, className) => element.classList.remove(className);
@@ -47,6 +48,19 @@ ZOHO.embeddedApp.on("PageLoad", function (data) {
     let relatedToAccounts;
 
 
+
+    //============================================================================================================================
+    // Function that capable to make a button to leaving the timer as idle background * leaving running
+    //============================================================================================================================
+
+
+    const leaveTimer = async () => {
+        return await ZOHO.CRM.UI.Popup.close();
+    }
+
+     leavetimer.addEventListener('click',()=>{
+        leaveTimer()
+        })
 
 
 
@@ -84,45 +98,20 @@ ZOHO.embeddedApp.on("PageLoad", function (data) {
         let userDetails = await checkUserLogin();
         let recordDetails = await getRecord();
 
-        console.log(userDetails.id)
-        console.log(recordDetails.Owner.id)
+        if(userDetails.id != recordDetails.Owner.id){
+            // if not equal create a message this isnt your record and it will count 5 secs then return leave
+           await ZOHO.CRM.UI.Resize({height:"100",width:"600"})
+            removeClass(restriction,'d-none');
+            addClass(autoTimerButton,'d-none');
+            addClass(manualTimerButton,'d-none');
+            setTimeout(() => {
+                removeClass(restriction,'d-none');
+                leaveTimer()
+              }, 5000);
+        }
     }
 
     checkOwnerClaim()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //============================================================================================================================
-    // Function that capable to make a button to leaving the timer as idle background * leaving running
-    //============================================================================================================================
-
-
-    const leaveTimer = async () => {
-        return await ZOHO.CRM.UI.Popup.close();
-    }
-
-     leavetimer.addEventListener('click',()=>{
-        leaveTimer()
-        })
-
 
     //============================================================================================================================
     //
