@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://live.zwidgets.com/js-sdk/1.2/ZohoEmbededAppSDK.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+        <link rel="stylesheet" href="css/styles.css">
+        <script src="scripts/index.js"></script>
+    </head>
+    <body>
+     <main >
+        <!-- Dialog Element -->
+        <div id="pop-up" class="pop-up">
+            <p id="popMsg"></p>
+        </div>
+        <div class="navigation d-none" id="navigation">
+            <div class="btn-group">
+                <div class="btn-nav">
+                    <button class="btn" id="auto-timer"><i class="fa fa-stopwatch"></i> Automatic Timer</button>
+                </div>
+                <div class="btn-nav">
+                    <button class="btn" id="manual-timer"><i class="fa fa-calendar-alt"></i> Manual Timer</button>
+                </div>
+            </div>
+        </div>
+        <div id="timer-fields" class="autotimer d-none">
+            <div class="time-container d-none" id="time-container">
+                <div class="clock">
+                    <span id="hours">00</span>
+                    <span>:</span>
+                    <span id="minutes">00</span>
+                    <span>:</span>
+                    <span id="seconds">00</span>
+                </div>
+            </div>
+            <div class="related-module d-none" id="related-module-div">
+                <strong>Related Module:</strong> <span id="module-name"></span>
+            </div>
+            <div class="alert alert-danger warning-message d-none" id="note-message-div" role="alert">
+                <strong>Note:</strong> <span id="note-message"></span>
+            </div>
+            <div class="field-wrap">
+              <label for="name" class="active highlight">Name</label>
+              <input type="text" id="name" name="name"/>
+            </div>
+            <div class="field-wrap">
+                <label for="name" class="active highlight">Type</label>
+               <input id="type" class="muted-input" name="type" value="Claims Handler" readonly/>  
+            </div>
+            <div class="field-wrap d-none" id="hourly-rate-div">
+              <label for="hourly_rate" class="active highlight">Hourly Rate</label>
+              <input type="text" id="hourly_rate" name="hourly_rate" readonly="readonly" value="0.0" disabled/>
+            </div>
+            <div class="d-none" id="manual-timer-fields">
+                <div class="field-wrap">
+                    <label for="start_time" class="active highlight">Start Time</label>
+                    <input type="datetime-local" id="start_time" name="start_time" required/>
+                    <span class="invalid-feedback d-none" id="start-time-error">Start Time should be less than end time</span>
+                </div>
+                <div class="field-wrap">
+                    <label for="end_time" class="active highlight">End Time</label>
+                    <input type="datetime-local" id="end_time" name="end_time" required/>
+                    <span class="invalid-feedback d-none" id="end-time-error">End Time should be greater than start time</span>
+                </div>
+            </div>
+            <div class="field-wrap d-none" id="description-div">
+              <label for="description" class="active highlight">Description</label>
+              <textarea id="description" name="description" rows="5"></textarea>
+            </div>
+            <div class="button-container">
+                <button class="btn btn-secondary mr-2 d-none" id="back-button"><i class="fa fa-circle-chevron-left"></i> Back</button>
+                <button class="btn btn-primary d-none" id="start-timer"><i class="fa fa-stopwatch text-white"></i> Start Timer</button>
+                <button class="btn btn-minimize btn-inbetwen-spacer d-none" id="leave-timer"><i class="fa-solid fa-maximize"></i> Leave Running </button>
+                <button class="btn btn-primary d-none" id="submit-button"><i class="fa fa-power-off text-white"></i> Finish Timer</button>
+                <button class="btn btn-primary d-none" id="submit-button-manual"><i class="fa fa-floppy-disk text-white"></i> Save Logs</button>
+            </div>
+        </div>
+     </main>
+    </body>
+</html>
